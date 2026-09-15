@@ -427,6 +427,89 @@ button {
   display: block;
 }
 
+/* ===== 생성 코스: 필 문구 · 정점 점 · 스캔 링 · 출처 · 안내 ===== */
+
+.generating-pill .pill-text {
+  display: grid;
+}
+
+.generating-pill .pill-text-item {
+  grid-area: 1 / 1;
+  white-space: nowrap;
+}
+
+.route-vertex {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #fff;
+  border: 3.5px solid #0f0f0f;
+  pointer-events: none;
+  animation: route-turn-in 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.4);
+}
+
+.current-marker.is-scanning .current-marker-pulse {
+  display: block;
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid #0f0f0f;
+  pointer-events: none;
+  animation: scan-pulse 1.6s ease-out infinite;
+}
+
+.current-marker.is-scanning::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid #0f0f0f;
+  pointer-events: none;
+  animation: scan-pulse 1.6s ease-out 0.8s infinite;
+  opacity: 0;
+}
+
+@keyframes scan-pulse {
+  from {
+    transform: scale(0.6);
+    opacity: 0.55;
+  }
+  to {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+.map-attribution {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(4px + env(safe-area-inset-bottom));
+  z-index: 5;
+  text-align: center;
+  font-size: 10px;
+  line-height: 12px;
+  color: rgba(15, 15, 15, 0.55);
+  text-shadow:
+    0 0 3px #fff,
+    0 0 3px #fff;
+  pointer-events: none;
+}
+
+.sheet-notice {
+  margin: 8px 0 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .route-vertex,
+  .current-marker.is-scanning .current-marker-pulse,
+  .current-marker.is-scanning::before {
+    animation: none;
+  }
+}
+
 /* ===== 추천 코스 마커 ===== */
 
 .course-marker {
@@ -1080,3 +1163,21 @@ button {
 .rp-submit:disabled {
   cursor: default;
 }
+.route-error {
+  position: absolute;
+  z-index: 12;
+  bottom: 110px;
+  left: 20px;
+  right: 20px;
+  padding: 20px;
+  border-radius: 22px;
+  background: #fff;
+  color: #171717;
+  box-shadow: 0 8px 32px #0002;
+}
+.route-error p { margin: 0 0 14px; font-size: 14px; line-height: 1.6; }
+.route-error button { padding: 10px 12px; border: 0; border-radius: 12px; background: #171717; color: #fff; cursor: pointer; }
+.route-error button + button { margin-left: 8px; color: #555; background: #f2f2f2; }
+.sheet-waypoints { display: flex; flex-wrap: wrap; gap: 8px 12px; list-style: none; padding: 0; margin: 12px 0; font-size: 12px; }
+.sheet-waypoints li { display: flex; align-items: center; gap: 5px; }
+.sheet-waypoints li span { display: grid; place-items: center; width: 18px; height: 18px; border-radius: 50%; background: #171717; color: #fff; font-size: 10px; }

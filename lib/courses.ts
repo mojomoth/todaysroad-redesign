@@ -16,6 +16,18 @@ export interface Course {
   generated?: boolean;
   /** 지도에 그릴 산책 경로 (생성 코스만) */
   path?: { lat: number; lng: number }[];
+  /** 생성 방식: 지도 이미지 세그멘테이션 */
+  source?: "segmented";
+  /** 시트 하단에 작게 보이는 안내 (폴백 사유 등) */
+  notice?: string;
+  /** 재현용 시드 (`generated-${seed}`) */
+  seed?: number;
+  lengthM?: number;
+  ascentM?: number | null;
+  /** 테마 정점 — 선이 지나갈 때 점으로 나타난다 (turn은 반환점) */
+  waypoints?: import("./route/types").Waypoint[] | null;
+  /** 반환점의 path 인덱스 */
+  turnIndex?: number;
 }
 
 export const COURSES: Course[] = [

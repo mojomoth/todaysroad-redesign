@@ -1,0 +1,10 @@
+.git/
+.claude/
+.agents/
+.codex/
+.gstack/
+.env*
+.next/
+.test-build/
+node_modules/
+*.tsbuildinfo

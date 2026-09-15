@@ -65,6 +65,14 @@ export default function CourseSheet({
               </svg>
               {course.difficulty}
             </span>
+            {course.ascentM != null && (
+              <span className="chip">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M3 19 9.5 8l3.2 5.4L15 10l6 9H3z" />
+                </svg>
+                오르막 {Math.round(course.ascentM)}m
+              </span>
+            )}
           </div>
         </div>
         <div className="sheet-photo-wrap">
@@ -75,6 +83,12 @@ export default function CourseSheet({
         </div>
       </div>
       <p className="sheet-desc">{course.description}</p>
+      {course.waypoints?.length ? (
+        <ol className="sheet-waypoints" aria-label="산책 경유지">
+          {course.waypoints.map((point, index) => <li key={`${point.pathIndex}-${index}`}><span>{index + 1}</span>{point.label || "산책 경유지"}</li>)}
+        </ol>
+      ) : null}
+      {course.notice && <p className="sheet-notice">{course.notice}</p>}
     </motion.section>
   );
 }
